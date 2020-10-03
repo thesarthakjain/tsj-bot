@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 import os
 
-token = os.environ.get("bot_token")
+token = os.environ.get('bot_token')
 client = commands.Bot(command_prefix = 'tsj')
 
 @client.event
