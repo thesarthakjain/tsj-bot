@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-import cred
 
 
 client = commands.Bot(command_prefix = 'tsj')
@@ -9,4 +8,4 @@ client = commands.Bot(command_prefix = 'tsj')
 async def on_ready():
     print("Bot is alive!")
 
-client.run(cred.bot_token)
+client.run(bot_token)
