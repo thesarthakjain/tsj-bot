@@ -29,6 +29,10 @@ async def commands(ctx):
     await ctx.send(f'{com.commands}')
 
 @client.command()
+async def intro(ctx):
+    await ctx.send(f'{com.intro}')
+
+@client.command()
 async def ping(ctx):
     await ctx.send(f'Pong bolu kya? :rofl:')
     await ctx.send(f'{round(client.latency*1000)} ms')
