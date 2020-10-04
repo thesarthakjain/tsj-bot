@@ -35,7 +35,7 @@ async def intro(ctx):
 @client.command()
 async def ping(ctx):
     await ctx.send(f'Pong bolu kya? :rofl:')
-    await ctx.send(f'{round(client.latency*1000)} ms')
+    await ctx.send(f'{round(client.latency*1000)} ms, khush?')
     print('Ping command used.')
 
 @client.command(aliases = ['8ball'])
