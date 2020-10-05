@@ -12,7 +12,7 @@ client = commands.Bot(command_prefix = '.', intents = intents)
 #events
 @client.event
 async def on_ready():
-    print('Bot is working :)')
+    print('bot is online!')
 
 @client.event
 async def on_member_join(member):
@@ -27,21 +27,23 @@ async def on_member_remove(member):
 @client.command()
 async def commands(ctx):
     await ctx.send(f'{com.commands}')
+    print("commands command used")
 
 @client.command()
 async def intro(ctx):
     await ctx.send(f'{com.intro}')
+    print("intro command used")
 
-@client.command()
+@client.command(aliases = ['git'])
 async def github(ctx):
     await ctx.send(f'{com.github}')
-
+    print("github command used")
 
 @client.command()
 async def ping(ctx):
     await ctx.send(f'Pong bolu kya? :rofl:')
     await ctx.send(f'{round(client.latency*1000)} ms, khush?')
-    print('Ping command used.')
+    print('ping command used.')
 
 @client.command(aliases = ['8ball'])
 async def _8ball(ctx, *, question):
