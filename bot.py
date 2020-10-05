@@ -33,6 +33,11 @@ async def intro(ctx):
     await ctx.send(f'{com.intro}')
 
 @client.command()
+async def github(ctx):
+    await ctx.send(f'{com.github}')
+
+
+@client.command()
 async def ping(ctx):
     await ctx.send(f'Pong bolu kya? :rofl:')
     await ctx.send(f'{round(client.latency*1000)} ms, khush?')
