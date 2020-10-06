@@ -12,7 +12,7 @@ client = commands.Bot(command_prefix = '.', intents = intents)
 #events
 @client.event
 async def on_ready():
-    print('bot is online!')
+    print('bot is online and working!')
 
 @client.event
 async def on_member_join(member):
