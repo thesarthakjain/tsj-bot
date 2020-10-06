@@ -1,7 +1,7 @@
 #commands for constant replies
 
 commands = 'Some commands for <@761623837263265803> are:\n' \
-           'commands(obviously), intro, github, ping, 8ball<Your question>'
+           'commands(obviously), intro, clear <number of messages>, github, ping, 8ball <Your question>'
 
 intro = "Hello, I am <@761623837263265803> discord bot.\n" \
         "My father's name is <@629276069878562817>."
