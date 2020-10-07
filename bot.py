@@ -11,6 +11,7 @@ client = commands.Bot(command_prefix = '.', intents = intents)
 
 
 #events
+
 @client.event
 async def on_ready():
     print('bot is online and working!')
@@ -25,6 +26,12 @@ async def on_member_remove(member):
 
 
 #commands
+
+@client.command(aliases = ['ver'])
+async def version(ctx):
+    await ctx.send(f'***TSJ version: {com.version}***')
+    print("version command used")
+
 @client.command(aliases = ['com'])
 async def commands(ctx):
     await ctx.send(f'{com.commands}')
@@ -68,14 +75,14 @@ async def _8ball(ctx, *, question):
 @client.command()
 async def kick(ctx, member : discord.Member, *, reason=None):    
     await member.kick(reason = reason)
-    await ctx.send(f'{member.name}#{member.discriminator} has been kicked.')
+    await ctx.send(f'**{member.name}#{member.discriminator} has been kicked.**')
     print(f'{member.name}#{member.discriminator} has been kicked from a server because {reason}.')
 
 @client.command()
 async def ban(ctx, member : discord.Member, *, reason=None):
     await member.ban(reason = reason)
-    await ctx.send(f'{member.name}#{member.discriminator} has been banned.')
-    print(f'{member.name}#{member.discriminator} has been banned from a server because {reason}.')
+    await ctx.send(f'**{member.name}#{member.discriminator} has been banned.**')
+    print(f'{member.name}#{member.discriminator} has been banned from a server for the reason: {reason}.')
 
 @client.command()
 async def unban(ctx, *, member):
@@ -86,9 +93,9 @@ async def unban(ctx, *, member):
         user = ban_entry.user
         if (user.name, user.discriminator) == (member_name, member_discriminator):
             await ctx.guild.unban(user)
-            await ctx.send(f'{user.name}#{user.discriminator} has been unbanned.')
+            await ctx.send(f'**{user.name}#{user.discriminator} has been unbanned.**')
             print(f'{user.name}#{user.discriminator} has been unbanned from a server.')
             return
-    await ctx.send(f'{member_name}#{member_discriminator} not found in server ban list.')
+    await ctx.send(f'**{member_name}#{member_discriminator} not found in server ban list.**')
 
 client.run(token)

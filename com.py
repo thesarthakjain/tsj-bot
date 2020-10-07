@@ -1,7 +1,11 @@
 #commands for constant replies
 
+version = "1.29"
+
 commands = '**Some commands for <@761623837263265803> are:**' \
-           '```com/commands(obviously) \nintro \nclear <number of messages> \ngit/github \nping \n8ball <Your question> \nkick <member tag> <reason(optional)> \nban <member tag> <reason(optional)>```'
+           '```com/commands(obviously) \nintro \nclear <number of messages> \ngit/github \nping'\
+        '\n8ball <Your question> \nkick <member tag> <reason(optional)> \nban <member tag> <reason(optional)>'\
+        '\nunban <name>#<discriminator>```'
 
 intro = "**Hello, I am <@761623837263265803> discord bot.\n" \
         "My father's name is <@629276069878562817>.**"
