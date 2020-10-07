@@ -1,12 +1,12 @@
 #commands for constant replies
 
-commands = 'Some commands for <@761623837263265803> are:\n' \
-           'commands(obviously), intro, clear <number of messages>, github, ping, 8ball <Your question>'
+commands = '**Some commands for <@761623837263265803> are:**' \
+           '```com/commands(obviously) \nintro \nclear <number of messages> \ngit/github \nping \n8ball <Your question> \nkick <member tag> <reason(optional)> \nban <member tag> <reason(optional)>```'
 
-intro = "Hello, I am <@761623837263265803> discord bot.\n" \
-        "My father's name is <@629276069878562817>."
+intro = "**Hello, I am <@761623837263265803> discord bot.\n" \
+        "My father's name is <@629276069878562817>.**"
 
-github = "https://github.com/thesarthakjain/tsj-bot"
+github = "***https://github.com/thesarthakjain/tsj-bot***"
 
 _8ball = ['As I see it, yes.',
              'Ask again later.',

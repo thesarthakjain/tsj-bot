@@ -25,7 +25,7 @@ async def on_member_remove(member):
 
 
 #commands
-@client.command()
+@client.command(aliases = ['com'])
 async def commands(ctx):
     await ctx.send(f'{com.commands}')
     print("commands command used")
@@ -55,13 +55,13 @@ async def github(ctx):
 
 @client.command()
 async def ping(ctx):
-    await ctx.send(f'Pong bolu kya? :rofl:')
-    await ctx.send(f'{round(client.latency*1000)} ms, khush?')
+    await ctx.send(f'**Pong bolu kya? :rofl:**')
+    await ctx.send(f'**{round(client.latency*1000)} ms, khush?**')
     print('ping command used.')
 
 @client.command(aliases = ['8ball'])
 async def _8ball(ctx, *, question):
-    await ctx.send(f'Question: {question}\nAnswer: {random.choice(com._8ball)}')
+    await ctx.send(f'**Question: {question}\nAnswer: {random.choice(com._8ball)}**')
     print('8ball command used.')
 
 @client.command()
