@@ -64,5 +64,13 @@ async def _8ball(ctx, *, question):
     await ctx.send(f'Question: {question}\nAnswer: {random.choice(com._8ball)}')
     print('8ball command used.')
 
+@client.command()
+async def kick(ctx, member : discord.Member, *, reason=None):
+    await member.kick(reason = reason)
+
+@client.command()
+async def ban(ctx, member : discord.Member, *, reason=None):
+    await member.ban(reason = reason)
+
 
 client.run(token)
