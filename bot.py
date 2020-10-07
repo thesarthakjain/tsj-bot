@@ -64,13 +64,31 @@ async def _8ball(ctx, *, question):
     await ctx.send(f'**Question: {question}\nAnswer: {random.choice(com._8ball)}**')
     print('8ball command used.')
 
+
 @client.command()
-async def kick(ctx, member : discord.Member, *, reason=None):
+async def kick(ctx, member : discord.Member, *, reason=None):    
     await member.kick(reason = reason)
+    await ctx.send(f'{member.name}#{member.discriminator} has been kicked.')
+    print(f'{member.name}#{member.discriminator} has been kicked from a server because {reason}.')
 
 @client.command()
 async def ban(ctx, member : discord.Member, *, reason=None):
     await member.ban(reason = reason)
+    await ctx.send(f'{member.name}#{member.discriminator} has been banned.')
+    print(f'{member.name}#{member.discriminator} has been banned from a server because {reason}.')
 
+@client.command()
+async def unban(ctx, *, member):
+    banned_users = await ctx.guild.bans()
+    member_name, member_discriminator = member.split('#')
+    
+    for ban_entry in banned_users:
+        user = ban_entry.user
+        if (user.name, user.discriminator) == (member_name, member_discriminator):
+            await ctx.guild.unban(user)
+            await ctx.send(f'{user.name}#{user.discriminator} has been unbanned.')
+            print(f'{user.name}#{user.discriminator} has been unbanned from a server.')
+            return
+    await ctx.send(f'{member_name}#{member_discriminator} not found in server ban list.')
 
 client.run(token)
