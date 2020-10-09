@@ -12,6 +12,7 @@ class main(commands.Cog):
 #events
     @commands.Cog.listener()
     async def on_ready(self):
+        await self.client.change_presence(activity=discord.Game("with my feelings."))
         print('bot is online!')
 
     @commands.Cog.listener()
@@ -27,7 +28,7 @@ class main(commands.Cog):
 #commands
     @commands.command(aliases = ['ver'])
     async def version(self, ctx):
-        await ctx.send(f'***TSJ version: 1.35***')
+        await ctx.send(f'***TSJ version: 1.36***')
         print("version command used")
 
     @commands.command(aliases = ['com','commands'])
@@ -35,7 +36,7 @@ class main(commands.Cog):
         await ctx.send(f'**Some commands for <@761623837263265803> are:**' \
            '```com/commands(obviously) \nintro \nclear <number of messages> \ngit/github \nping'\
         '\n8ball <Your question> \nkick <member tag> <reason(optional)> \nban <member tag> <reason(optional)>'\
-        '\nunban <name>#<discriminator>```')
+        '\nunban <name>#<discriminator> \nspam <delay> <duration> <spam message/ping>```')
         print("commands command used")
 
     @commands.command()
@@ -132,6 +133,20 @@ class main(commands.Cog):
                 print(f'{user.name}#{user.discriminator} has been unbanned from a server.')
                 return
         await ctx.send(f'**{member_name}#{member_discriminator} not found in server ban list.**')
+
+    @commands.command()
+    async def spam (self, ctx, delay, time_limit, msg = "ping"):
+        start = time.time()
+        end = start
+        while(True):
+            if msg == "ping":
+                await ctx.send(f'**{round(self.client.latency*1000)} ms**')
+            else:
+                await ctx.send(f'**{msg}**')
+            time.sleep(float(delay))
+            if end-start >= float(time_limit):
+                return
+            end = time.time()
 
 
 def setup(client):
