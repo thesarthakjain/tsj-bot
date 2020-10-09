@@ -28,17 +28,21 @@ class main(commands.Cog):
 #commands
     @commands.command(aliases = ['ver'])
     async def version(self, ctx):
-        await ctx.send(f'***TSJ version: {com.version}***')
+        await ctx.send(f'***TSJ version: 1.31***')
         print("version command used")
 
     @commands.command(aliases = ['com','commands'])
     async def _commands(self, ctx):
-        await ctx.send(f'{com.commands}')
+        await ctx.send(f'**Some commands for <@761623837263265803> are:**' \
+           '```com/commands(obviously) \nintro \nclear <number of messages> \ngit/github \nping'\
+        '\n8ball <Your question> \nkick <member tag> <reason(optional)> \nban <member tag> <reason(optional)>'\
+        '\nunban <name>#<discriminator>```')
         print("commands command used")
 
     @commands.command()
     async def intro(self, ctx):
-        await ctx.send(f'{com.intro}')
+        await ctx.send(f"*Hello, I am <@761623837263265803> discord bot.\n" \
+                        "My father's name is <@629276069878562817>.**")
         print("intro command used")
 
     @commands.command()
@@ -56,7 +60,7 @@ class main(commands.Cog):
 
     @commands.command(aliases = ['git'])
     async def github(self, ctx):
-        await ctx.send(f'{com.github}')
+        await ctx.send(f'***https://github.com/thesarthakjain/tsj-bot***')
         print("github command used")
 
     @commands.command()
@@ -71,7 +75,27 @@ class main(commands.Cog):
 
     @commands.command(aliases = ['8ball'])
     async def _8ball(self, ctx, *, question):
-        await ctx.send(f'**Question: {question}\nAnswer: {random.choice(com._8ball)}**')
+        responses = ['As I see it, yes.',
+             'Ask again later.',
+             'Better not tell you now.',
+             'Cannot predict now.',
+             'Concentrate and ask again.',
+             'Don’t count on it.',
+             'It is certain.',
+             'It is decidedly so.',
+             'Most likely.',
+             'My reply is no.',
+             'My sources say no.',
+             'Outlook not so good.',
+             'Outlook good.',
+             'Reply hazy, try again.',
+             'Signs point to yes.',
+             'Very doubtful.',
+             'Without a doubt.',
+             'Yes.',
+             'Yes – definitely.',
+             'You may rely on it.']
+        await ctx.send(f'**Question: {question}\nAnswer: {random.choice(responses)}**')
         print('8ball command used.')
 
 
