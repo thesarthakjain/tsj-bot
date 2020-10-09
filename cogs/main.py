@@ -2,7 +2,6 @@ import discord
 from discord.ext import commands
 import os
 import random
-import com
 import time
 
 class main(commands.Cog):
@@ -28,7 +27,7 @@ class main(commands.Cog):
 #commands
     @commands.command(aliases = ['ver'])
     async def version(self, ctx):
-        await ctx.send(f'***TSJ version: 1.31***')
+        await ctx.send(f'***TSJ version: 1.34***')
         print("version command used")
 
     @commands.command(aliases = ['com','commands'])

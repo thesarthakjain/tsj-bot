@@ -2,7 +2,6 @@ import discord
 from discord.ext import commands
 import os
 import random
-import com
 import time
 
 token = os.environ.get('bot_token')
@@ -11,31 +10,46 @@ client = commands.Bot(command_prefix = '.', intents = intents)
 
 @client.command()
 async def load(ctx, extension):
-    client.load_extension(f'cogs.{extension}')
-    await ctx.send(f'Loaded {extension}') 
-    print(f'loaded {extension}')
+    try:
+        client.load_extension(f'cogs.{extension}')
+        await ctx.send(f'**Loaded {extension}**') 
+        print(f'loaded {extension}')
+    except:
+        await ctx.send(f"**Could not load {extension}**")
+        print(f"can't load {extension}")
 
 @client.command()
 async def unload(ctx, extension):
-    client.unload_extension(f'cogs.{extension}')
-    await ctx.send(f'Unloaded {extension}')
-    print(f'unloaded {extension}')
+    try:
+        client.unload_extension(f'cogs.{extension}')
+        await ctx.send(f'**Unloaded {extension}**')
+        print(f'unloaded {extension}')
+    except:
+        await ctx.send(f"**Could not unload {extension}**")
+        print(f"can't unload {extension}")
 
 @client.command()
 async def reload(ctx, extension = "all"):
     if extension == "all":
-        for file_name in os.listdir('./cogs'):
-            if file_name.endswith('.py'):
-                client.unload_extension(f'cogs.{file_name[:-3]}')
-                client.load_extension(f'cogs.{file_name[:-3]}')
-        await ctx.send(f'Reloaded {extension}')
-        print(f'reloaded {extension}')
-
+        try:
+            for file_name in os.listdir('./cogs'):
+                if file_name.endswith('.py'):
+                    client.unload_extension(f'cogs.{file_name[:-3]}')
+                    client.load_extension(f'cogs.{file_name[:-3]}')
+            await ctx.send(f'**Reloaded {extension}**')
+            print(f'reloaded {extension}')
+        except:
+            await ctx.send(f"**Could not reload {extension}, try loading manually.**")
+            print(f"can't reload {extension}, try loading manually.")
     else:
-        client.unload_extension(f'cogs.{extension}')
-        client.load_extension(f'cogs.{extension}')
-        await ctx.send(f'Reloaded {extension}')
-        print(f'reloaded {extension}')
+        try:
+            client.unload_extension(f'cogs.{extension}')
+            client.load_extension(f'cogs.{extension}')
+            await ctx.send(f'**Reloaded {extension}**')
+            print(f'reloaded {extension}')
+        except:
+            await ctx.send(f"**Could not reload {extension}, try loading manually.**")
+            print(f"can't reload {extension}, try loading manually.")
 
 for file_name in os.listdir('./cogs'):
     if file_name.endswith('.py'):
