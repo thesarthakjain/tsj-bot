@@ -27,7 +27,7 @@ class main(commands.Cog):
 #commands
     @commands.command(aliases = ['ver'])
     async def version(self, ctx):
-        await ctx.send(f'***TSJ version: 1.34***')
+        await ctx.send(f'***TSJ version: 1.35***')
         print("version command used")
 
     @commands.command(aliases = ['com','commands'])
@@ -100,15 +100,24 @@ class main(commands.Cog):
 
     @commands.command()
     async def kick(self, ctx, member : discord.Member, *, reason=None):    
-        await member.kick(reason = reason)
-        await ctx.send(f'**{member.name}#{member.discriminator} has been kicked.**')
-        print(f'{member.name}#{member.discriminator} has been kicked from a server because {reason}.')
+        try:
+            await member.kick(reason = reason)
+            await ctx.send(f'**{member.name}#{member.discriminator} has been kicked.**')
+            print(f'{member.name}#{member.discriminator} has been kicked from a server because {reason}.')
+        except:
+            await ctx.send(f'**{member.name}#{member.discriminator} can not be kicked.**')
+            print(f'{member.name}#{member.discriminator} can not be kicked from a server.')
 
     @commands.command()
     async def ban(self, ctx, member : discord.Member, *, reason=None):
-        await member.ban(reason = reason)
-        await ctx.send(f'**{member.name}#{member.discriminator} has been banned.**')
-        print(f'{member.name}#{member.discriminator} has been banned from a server for the reason: {reason}.')
+        try:
+            await member.ban(reason = reason)
+            await ctx.send(f'**{member.name}#{member.discriminator} has been banned.**')
+            print(f'{member.name}#{member.discriminator} has been banned from a server for the reason: {reason}.')
+        except:
+            await ctx.send(f'**{member.name}#{member.discriminator} can not be banned.**')
+            print(f'{member.name}#{member.discriminator} can not be banned from a server.')
+
 
     @commands.command()
     async def unban(self, ctx, *, member):
