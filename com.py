@@ -1,6 +1,6 @@
 #commands for constant replies
 
-version = "1.30"
+version = "1.31"
 
 commands = '**Some commands for <@761623837263265803> are:**' \
            '```com/commands(obviously) \nintro \nclear <number of messages> \ngit/github \nping'\

@@ -61,8 +61,12 @@ class main(commands.Cog):
 
     @commands.command()
     async def ping(self, ctx):
-        await ctx.send(f'**Pong bolu kya? :rofl:**')
-        await ctx.send(f'**{round(self.client.latency*1000)} ms, khush?**')
+        num = random.randint(0,9)
+        if num == 0:
+            await ctx.send(f'**Pong bolu kya? :rofl:**')
+            await ctx.send(f'**{round(self.client.latency*1000)} ms, khush?**')
+        else:
+            await ctx.send(f'**{round(self.client.latency*1000)} ms**')
         print('ping command used.')
 
     @commands.command(aliases = ['8ball'])
