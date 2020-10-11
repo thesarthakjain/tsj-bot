@@ -28,7 +28,7 @@ class main(commands.Cog):
 #commands
     @commands.command(aliases = ['ver'])
     async def version(self, ctx):
-        await ctx.send(f'***TSJ version: 1.36***')
+        await ctx.send(f'***TSJ version: 1.38***')
         print("version command used")
 
     @commands.command(aliases = ['com','commands'])
