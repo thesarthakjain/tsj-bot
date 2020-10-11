@@ -74,7 +74,7 @@ class main(commands.Cog):
         print('ping command used.')
 
     @commands.command(aliases = ['8ball'])
-    async def _8ball(self, ctx, *, question):
+    async def a8ball(self, ctx, *, question):
         responses = ['As I see it, yes.',
              'Ask again later.',
              'Better not tell you now.',
@@ -98,6 +98,12 @@ class main(commands.Cog):
         await ctx.send(f'**Question: {question}\nAnswer: {random.choice(responses)}**')
         print('8ball command used.')
 
+    @a8ball.error
+    async def a8ball_error(self, ctx, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            await ctx.send('Please add a question.')
+            print("no arguement was given  in 8ball command")
+
 
     @commands.command()
     async def kick(self, ctx, member : discord.Member, *, reason=None):    
@@ -109,6 +115,12 @@ class main(commands.Cog):
             await ctx.send(f'**{member.name}#{member.discriminator} can not be kicked.**')
             print(f'{member.name}#{member.discriminator} can not be kicked from a server.')
 
+    @kick.error
+    async def kick_error(self, ctx, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            await ctx.send('Please tag the account.')
+            print("no arguement was given  in kick command")
+
     @commands.command()
     async def ban(self, ctx, member : discord.Member, *, reason=None):
         try:
@@ -119,6 +131,11 @@ class main(commands.Cog):
             await ctx.send(f'**{member.name}#{member.discriminator} can not be banned.**')
             print(f'{member.name}#{member.discriminator} can not be banned from a server.')
 
+    @ban.error
+    async def ban_error(self, ctx, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            await ctx.send('Please tag the account.')
+            print("no arguement was given  in ban command")
 
     @commands.command()
     async def unban(self, ctx, *, member):
@@ -134,20 +151,39 @@ class main(commands.Cog):
                 return
         await ctx.send(f'**{member_name}#{member_discriminator} not found in server ban list.**')
 
-    @commands.command()
-    async def spam (self, ctx, delay, time_limit, msg = "ping"):
-        start = time.time()
-        end = start
-        while(True):
-            if msg == "ping":
-                await ctx.send(f'**{round(self.client.latency*1000)} ms**')
-            else:
-                await ctx.send(f'**{msg}**')
-            time.sleep(float(delay))
-            if end-start >= float(time_limit):
-                return
-            end = time.time()
+    @unban.error
+    async def unban_error(self, ctx, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            await ctx.send('Please add the name and discriminator.')
+            print("no arguement was given  in unban command")
 
+    @commands.command()
+    async def spam (self, ctx, delay, duration, msg = "ping"):
+        if float(delay) < 2:
+            await ctx.send("Delay can not be lesser than 2 seconds.")
+            print("spam failed bec delay < 2 sec")
+        elif float(duration) > 600:
+            await ctx.send("Duration can not exceed 600 seconds.")
+            print("spam failed bec duration > 600 sec")
+        else:
+            start = time.time()
+            end = start
+            while(True):
+                if msg == "ping":
+                    await ctx.send(f'**{round(self.client.latency*1000)} ms**')
+                else:
+                    await ctx.send(f'**{msg}**')
+                time.sleep(float(delay))
+                if end-start >= float(duration):
+                    return
+                end = time.time()
+            print("spam command was used")
+
+    @spam.error
+    async def spam_error(self, ctx, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            await ctx.send('Please add delay, duration and message.')
+            print("no arguement was given  in spam command")
 
 def setup(client):
     client.add_cog(main(client))
