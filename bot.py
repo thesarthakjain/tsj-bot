@@ -28,7 +28,7 @@ async def unload(ctx, extension):
         await ctx.send(f"**Could not unload {extension}**")
         print(f"can't unload {extension}")
 
-@client.command()
+@client.command(aliases = ['r'])
 async def reload(ctx, extension = "all"):
     if extension == "all":
         try:
