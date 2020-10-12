@@ -3,10 +3,59 @@ from discord.ext import commands
 import os
 import random
 import time
+import json
+
+
+def get_prefix(client, message):
+    with open('./utils/prefixes.json', 'r') as f:
+        prefixes = json.load(f)
+    return prefixes[str(message.guild.id)]
+
 
 token = os.environ.get('bot_token')
 intents = discord.Intents(messages = True, guilds = True, reactions = True, members = True, presences = True)
-client = commands.Bot(command_prefix = '.', intents = intents)
+client = commands.Bot(command_prefix = get_prefix, intents = intents)
+
+
+#events
+@client.event
+async def on_guild_join(guild):
+    with open('./utils/prefixes.json', 'r') as f:
+        prefixes = json.load(f)
+
+    prefixes[str(guild.id)] = '.'
+
+    with open('./utils/prefixes.json', 'w') as f:
+        json.dump(prefixes, f, indent=4)
+
+
+@client.event
+async def on_guild_remove(guild):
+    with open('./utils/prefixes.json', 'r') as f:
+        prefixes = json.load(f)
+
+    prefixes.pop(str(guild.id))
+
+    with open('./utils/prefixes.json', 'w') as f:
+        json.dump(prefixes, f, indent=4)
+
+
+#commands
+
+
+@client.command()
+async def changeprefix(ctx, prefix):
+    with open('./utils/prefixes.json', 'r') as f:
+        prefixes = json.load(f)
+
+    prefixes[str(ctx.guild.id)] = prefix
+
+    with open('./utils/prefixes.json', 'w') as f:
+        json.dump(prefixes, f, indent=4)
+    await ctx.send(f"**Bot prefix changed to {prefix}**")
+    print(f"bot prefix chaned to {prefix}")
+    
+
 
 @client.command()
 async def load(ctx, extension):
