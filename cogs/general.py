@@ -1,4 +1,7 @@
 #for general purpose commands
+
+manager_role = "manager" #role that can use clear and  spam commands
+
 import discord
 from discord.ext import commands
 import os
@@ -11,6 +14,7 @@ class main(commands.Cog):
 
 
     @commands.command()
+    @commands.has_role(manager_role)
     async def clear(self, ctx, amount = 1):
         await ctx.channel.purge(limit = amount+1)
         if amount == 1 :
@@ -20,6 +24,10 @@ class main(commands.Cog):
         time.sleep(1)
         await ctx.channel.purge(limit = 1)
         print(f'{amount} messages cleared.')
+    @clear.error
+    async def clear_error(self, ctx, error):
+        await ctx.send(f'**You do not have {manager_role} role to use that command.**')
+        print("no permission to use clear")
 
     
     @commands.command(aliases = ['8ball'])
@@ -54,12 +62,13 @@ class main(commands.Cog):
 
 
     @commands.command()
+    @commands.has_role(manager_role)
     async def spam (self, ctx, delay, duration, msg = "ping"):
         if float(delay) < 2:
-            await ctx.send("Delay can not be lesser than 2 seconds.")
+            await ctx.send("**Delay can not be lesser than 2 seconds.**")
             print("spam failed bec delay < 2 sec")
         elif float(duration) > 600:
-            await ctx.send("Duration can not exceed 600 seconds.")
+            await ctx.send("**Duration can not exceed 600 seconds.**")
             print("spam failed bec duration > 600 sec")
         else:
             start = time.time()
@@ -79,6 +88,9 @@ class main(commands.Cog):
         if isinstance(error, commands.MissingRequiredArgument):
             await ctx.send('**Please add delay, duration and message.**')
             print("no arguement was given  in spam command")
+        else:
+            await ctx.send(f'**You do not have {manager_role} role to use that command.**')
+            print('no permission to use spam command')
 
     
 def setup(client):
