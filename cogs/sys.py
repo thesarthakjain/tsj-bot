@@ -20,7 +20,7 @@ class main(commands.Cog):
     async def reboot(self, ctx):
         await ctx.send('Do you wanna continue? (Y/N)')
         try:
-            msg = await self.client.wait_for('message', timeout = 10)
+            msg = await self.client.wait_for('message', timeout = 5)
             if msg.content == 'y' or msg.content == 'Y':
                 
                 await ctx.send('Rebooting the system.')
@@ -41,7 +41,7 @@ class main(commands.Cog):
     async def shutdown(self, ctx):
         await ctx.send('Do you wanna continue? (Y/N)')
         try:
-            msg = await self.client.wait_for('message')
+            msg = await self.client.wait_for('message', timeout = 5)
             if msg.content == 'y' or msg.content == 'Y':
                 
                 await ctx.send('Turing the system off.')
@@ -62,7 +62,7 @@ class main(commands.Cog):
     async def cls(self, ctx):
         await ctx.send('Do you wanna continue? (Y/N)')
         try:
-            msg = await self.client.wait_for('message', timeout = 10)
+            msg = await self.client.wait_for('message', timeout = 5)
             if msg.content == 'y' or msg.content == 'Y':    
                 await ctx.send('Clearing the logs.')
                 print('clearing the logs')
