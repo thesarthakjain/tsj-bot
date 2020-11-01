@@ -71,7 +71,7 @@ class main(commands.Cog):
                     print('logs cleared')
                     await ctx.send('Logs cleared')
                 elif platform.platform()[0:5] == "Linux":
-                    os.system("cls")
+                    os.system("clear")
                     print('logs cleared')
                     await ctx.send('Logs cleared')
                 else :
